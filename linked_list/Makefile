@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-TARGET = queue
+TARGET = list
 SRCS = main.c
 
 all: $(TARGET)
