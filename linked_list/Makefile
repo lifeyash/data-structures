@@ -1,14 +1,15 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-TARGET = main
+TARGET = list
 SRCS = main.c
 
 all: $(TARGET)
-	$(TARGET): $(SRCS)
-	$(CC) $(CFLAGS) -o $@ $^
 
-clean:
-	rm -f $(TARGET).exe
+$(TARGET): $(SRCS)
+	$(CC) $(CFLAGS) -o $@ $^
 
 run: $(TARGET)
 	./$(TARGET)
+
+clean:
+	rm -f $(TARGET) $(TARGET).exe

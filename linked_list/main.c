@@ -86,6 +86,78 @@ int search(int data) {
   return -1; // Not found
 }
 
+int insert(int data, int position) {
+    Node *new_node = (Node *)malloc(sizeof(Node));
+
+    if (new_node == NULL) {
+        return -1; // Memory allocation failed
+    }
+
+    new_node->data = data;
+    new_node->next = NULL;
+
+    // Insert at beginning
+    if (position == 0) {
+        new_node->next = head;
+        head = new_node;
+
+        printf("Inserted %d at position %d.\n", data, position);
+        return 0; // Success
+    }
+
+    Node *current = head;
+    int index = 0;
+
+    while (current != NULL && index < position - 1) {
+        current = current->next;
+        index++;
+    }
+
+    // Invalid position
+    if (current == NULL) {
+        free(new_node);
+        return -1;  // Position out of bounds
+    }
+
+    new_node->next = current->next;
+    current->next = new_node;
+
+    printf("Inserted %d at position %d.\n", data, position);
+
+    return 0; // Success
+}
+
+int add_end(int data) {
+    Node *new_node = (Node *)malloc(sizeof(Node));
+
+    if (new_node == NULL) {
+        return -1; // Memory allocation failed
+    }
+
+    new_node->data = data;
+    new_node->next = NULL;
+
+    // If list empty
+    if (head == NULL) {
+        head = new_node;
+
+        printf("Added %d to the list.\n", new_node->data);
+        return 0;
+    }
+
+    Node *current = head;
+
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next = new_node;
+
+    printf("Added %d to the list.\n", new_node->data);
+
+    return 0; // Success
+}
+
 int main(void) {
   test();
   
@@ -96,7 +168,8 @@ void test(void) {
   init(10);
   add(20);
   add(30);
-
+  insert(25, 2);
+  add(40);
   traverse();
 
   delete(20);
@@ -107,4 +180,8 @@ void test(void) {
   search(30);
   search(20);
   search(40);
+
+  add_end(50);
+  printf("After adding 50 at the end:\n");
+  traverse();
 }
