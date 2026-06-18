@@ -77,6 +77,15 @@ int dequeue(void) {
   return data; // Return the dequeued data
 }
 
+int peek(void) {
+  if (head == NULL) {
+    printf("Queue is empty. Cannot peek.\n");
+    return -1; // Queue is empty
+  }
+
+  return head->data; // Return the data at the front of the queue
+}
+
 int main(void) {
   test();
 
@@ -98,4 +107,5 @@ void test(void) {
 
   enqueue(50);
   enqueue(60);
+  peek(); 
 }

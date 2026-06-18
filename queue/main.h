@@ -9,6 +9,7 @@ typedef struct node {
 int init(int data);
 int enqueue(int data);
 int dequeue(void);
+int peek(void);
 int traverse(void);
 void test(void);
 
